@@ -13,23 +13,23 @@ namespace Dapper.Sample.Controllers
     [ApiController]
     public class ShipperController : ControllerBase
     {
-        private IShipperDAL service;
-        public ShipperController(IShipperDAL service)
+        private readonly IShipperDal shipperDAL;
+        public ShipperController(IShipperDal service)
         {
-            this.service = service;
+            this.shipperDAL = service;
         }
 
         [HttpGet("")]
         public ActionResult Get()
         {
-            var shipper = service.GetAll();
+            var shipper = shipperDAL.GetAll();
             return Ok(shipper);
         }
 
         [HttpGet("~/getByIdShipper/ID")]
         public ActionResult GetById(int id)
         {
-            var shipper = service.GetById(id);
+            var shipper = shipperDAL.GetById(id);
             if (shipper is null)
             {
                 return NotFound();
@@ -40,21 +40,21 @@ namespace Dapper.Sample.Controllers
         [HttpDelete("~/deleteShipper/ID")]
         public ActionResult Delete(int id)
         {
-            service.DeleteById(id);
+            shipperDAL.DeleteById(id);
             return Ok(id + "has been deleted");
         }
 
         [HttpPost("~/addShipper")]
         public ActionResult Post(Shipper s)
         {
-            var newShipper = service.Add(s);
+            shipperDAL.Add(s);
             return Ok("The new shipper is added");
         }
 
         [HttpPut("~/updateShipper")]
         public ActionResult Put( int id, Shipper shipper)
         {
-            service.Update(id, shipper);
+            shipperDAL.Update(id, shipper);
             return Ok(id + "has been updated");
         }
     }

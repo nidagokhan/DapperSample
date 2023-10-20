@@ -20,11 +20,11 @@ namespace Dapper.Sample.Concrete
     /// *Execute: Bu metod, sorguyu çalıştırmak ve sonucunda etkilenen satır sayısını almak için kullanılır. Sorgu sonucunda veriler döndürülmez, sadece etkilenen satır sayısı bilgisi elde edilir.Bu metot genellikle INSERT, UPDATE veya DELETE gibi sorgular için kullanılır.
     /// </summary> 
     #endregion
-    public class ShipperDAL:IShipperDAL
+    public class ShipperDal:IShipperDal
     {
-        private IDbConnection db;
+        private readonly IDbConnection db;
 
-        public ShipperDAL(IConfiguration configuration)
+        public ShipperDal(IConfiguration configuration)
         {
             this.db = new SqlConnection(configuration.GetConnectionString("conn"));
         }
@@ -56,10 +56,10 @@ namespace Dapper.Sample.Concrete
             return db.Query<Shipper>(sql, new { @id = id }).SingleOrDefault();
         }
 
-        public void Update(int id,Shipper s)
+        public void Update(int id,Shipper shipper)
         {
             var sql = "Update Shippers set CompanyName=@CompanyName,Phone=@Phone,Aktifmi=@Aktifmi where ShipperID=@id";
-            db.Execute(sql, new { id, s.CompanyName, s.Phone, s.Aktifmi });
+            db.Execute(sql, new { id, shipper.CompanyName, shipper.Phone, shipper.Aktifmi });
         }
     }
 }

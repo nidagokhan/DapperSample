@@ -19,6 +19,5 @@ namespace Dapper.Sample.Entities
 
         public bool? Aktifmi { get; set; }
 
-       // public virtual ICollection<Order> Orders { get; set; }
     }
 }

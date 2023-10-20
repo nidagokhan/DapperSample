@@ -48,7 +48,7 @@ namespace Dapper.Sample.Entities
 
         public virtual Employee Employee { get; set; }
 
-        public virtual ICollection<Order_Detail> Order_Details { get; set; }
+        public virtual ICollection<OrderDetail> Order_Details { get; set; }
 
         public virtual Shipper Shipper { get; set; }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dapper.Sample.Interface
 {
-    public interface IShipperDAL
+    public interface IShipperDal
     {
         List<Shipper> GetAll();
         Shipper GetById(int id);
